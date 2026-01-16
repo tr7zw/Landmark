@@ -1,0 +1,8 @@
+Waypoint.name = Waypoint
+configui.title = Rename Point of Interest
+Waypoint.description = Allows teleporting to the Waypoint after finding it.
+commands.clear.desc = Clears the players or own exploreed landmarks.
+commands.tp.desc = Teleports to the specified landmark.
+commands.id.desc = The ID of the landmark.
+commands.manage.desc = Manage a landmark. Use the context menu to run this command.
+button.save = Save

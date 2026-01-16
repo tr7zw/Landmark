@@ -1,0 +1,70 @@
+{
+  "TranslationProperties": {
+    "Name": "landmark.Waypoint.name",
+    "Description": "landmark.Waypoint.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Landmark_Waypoint.png",
+  "Categories": [
+    "Blocks.Portals"
+  ],
+  "BlockType": {
+    "AmbientSoundEventId": "SFX_Portal_Neutral",
+    "DrawType": "Model",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Miscellaneous/Plate.blockymodel",
+    "HitboxType": "Landmark_Waypoint",
+    "BlockParticleSetId": "Stone",
+    "BlockSoundSetId": "Stone",
+    "VariantRotation": "NESW",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Unbreakable"
+      }
+    },
+    "Particles": [
+      {
+        "SystemId": "Landmark_Waypoint",
+        "PositionOffset": {
+          "Y": 4
+        }
+      }
+    ],
+    "BlockEntity": {
+      "Components": {
+        "LandmarkBlockData": {
+          "LandmarkType": "Waypoint"
+        }
+      }
+    },
+    "CustomModelTexture": [
+      {
+        "Weight": 1,
+        "Texture": "BlockTextures/Landmark_Empty.png"
+      }
+    ],
+    "Light": {
+      "Color": "#6bf"
+    }
+  },
+  "PlayerAnimationsId": "Block",
+  "Tags": {
+    "Type": [
+      "Portal"
+    ]
+  },
+  "Quality": "Technical",
+  "IconProperties": {
+    "Scale": 0.35,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone"
+}

@@ -1,0 +1,36 @@
+$C = "../Common.ui";
+
+@ContainerHeight = 240;
+
+$C.@Container {
+  Anchor: (Left: 50, Top: 170, Width: 470, Bottom: 800);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+
+      $C.@Title {
+        @Text = %landmark.configui.title;
+      }
+    }
+
+  }
+
+  #Content {
+    Group #CommandInfo {
+      FlexWeight: 1;
+      LayoutMode: TopScrolling;
+      Padding: (Left: 10);
+      ScrollbarStyle: $C.@DefaultScrollbarStyle;
+
+        $C.@TextField #Name {
+          FlexWeight: 1;
+        }
+
+
+    }
+
+  }
+}
+
+$C.@BackButton {}

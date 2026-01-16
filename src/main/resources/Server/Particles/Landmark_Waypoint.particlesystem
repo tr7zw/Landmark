@@ -1,0 +1,54 @@
+{
+  "Spawners": [
+    {
+      "SpawnerId": "MagicPortal_ForgottenTemple_Sparks",
+      "PositionOffset": {
+        "X": 0
+      },
+      "RotationOffset": {
+        "Pitch": 90
+      }
+    },
+    {
+      "SpawnerId": "MagicPortal_ForgottenTemple_SmokeMiddle",
+      "RotationOffset": {
+        "Pitch": 0
+      },
+      "PositionOffset": {
+        "X": 0
+      }
+    },
+    {
+      "SpawnerId": "MagicPortal_ForgottenTemple_GlowSmoke",
+      "RotationOffset": {
+        "Pitch": 0
+      },
+      "PositionOffset": {
+        "X": 0.0
+      }
+    },
+    {
+      "SpawnerId": "MagicPortal_ForgottenTemple_OuterCircle",
+      "RotationOffset": {
+        "Pitch": 0
+      },
+      "PositionOffset": {
+        "X": 0
+      }
+    },
+    {
+      "SpawnerId": "Landmark_Waystone_Stone",
+      "PositionOffset": {
+        "Y": 0
+      }
+    },
+    {
+      "SpawnerId": "ForgottenTemple_Particles",
+      "RotationOffset": {
+        "Pitch": 180
+      }
+    }
+  ],
+  "CullDistance": 80,
+  "IsImportant": true
+}

@@ -1,0 +1,22 @@
+{
+    "Group": "tr7zw",
+    "Name": "Landmark",
+    "Version": "0.0.4",
+    "Description": "Add landmarks for servers and adventure maps!",
+    "Authors": [
+        {
+            "Name": "tr7zw"
+        }
+    ],
+    "Website": "tr7zw.dev",
+    "ServerVersion": "*",
+    "Dependencies": {
+        "Hytale:BlockStateModule": "*"
+    },
+    "OptionalDependencies": {
+        
+    },
+    "DisabledByDefault": false,
+    "Main": "dev.tr7zw.landmark.LandmarkPlugin",
+    "IncludesAssetPack": true
+}
