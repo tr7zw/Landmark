@@ -52,6 +52,16 @@ public class LandmarkPlugin extends JavaPlugin {
                 .registerGlobal(AddWorldEvent.class, event -> event.getWorld().getWorldMapManager().getMarkerProviders().put("landmark_plugin", new LandmarkPoiProvider()));
     }
 
+    @Override
+    protected void start() {
+        poiManager.load();
+    }
+
+    @Override
+    protected void shutdown() {
+        poiManager.save();
+    }
+
     public ComponentType<ChunkStore, LandmarkBlock> getLandmarkBlockComponent() {
         return landmarkComponent;
     }
