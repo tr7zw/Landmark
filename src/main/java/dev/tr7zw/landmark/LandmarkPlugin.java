@@ -137,7 +137,7 @@ public class LandmarkPlugin extends JavaPlugin {
                 int x = ChunkUtil.worldCoordFromLocalCoord(chunksection.getX(), i);
                 int y = ChunkUtil.worldCoordFromLocalCoord(chunksection.getY(), j);
                 int z = ChunkUtil.worldCoordFromLocalCoord(chunksection.getZ(), k);
-                LandmarkPlugin.get().getPoiManager().addPoi(landmarkblock.getLandmarkUniqueId(), landmarkblock.getType(), landmarkblock.getLandmarkName(), x, y, z);
+                LandmarkPlugin.get().getPoiManager().addPoi(landmarkblock.getLandmarkUniqueId(), landmarkblock.getType(), landmarkblock.getLandmarkName(), x, y, z, commandBuffer.getExternalData().getWorld().getName());
                 LOGGER.atInfo().log("Landmark placed at " + x + ", " + y + ", " + z + " with "+ landmarkblock.getType() +" ID: " + landmarkblock.getLandmarkUniqueId());
             }
         }

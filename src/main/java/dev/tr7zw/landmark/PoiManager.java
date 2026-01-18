@@ -12,8 +12,8 @@ public class PoiManager {
     //FIXME: there has to be a better way to do this
     private final HashMap<UUID, PlayerLandmarkData> playerDataMap = new HashMap<>();
 
-    public void addPoi(String id, LandmarkType type, String name, int x, int y, int z) {
-        poiDataMap.put(id, new PoiData(id, type, name, x, y, z));
+    public void addPoi(String id, LandmarkType type, String name, int x, int y, int z, String worldName) {
+        poiDataMap.put(id, new PoiData(id, type, name, x, y, z, worldName));
     }
 
     public void removePoi(String id) {
@@ -25,7 +25,16 @@ public class PoiManager {
     }
 
     public PoiData getPoi(String id) {
-        return poiDataMap.get(id);
+        PoiData poi = poiDataMap.get(id);
+        if (poi != null) {
+            return poi;
+        }
+        for (PoiData p : poiDataMap.values()) {
+            if (p.name().replace(' ', '_').equalsIgnoreCase(id)) {
+                return p;
+            }
+        }
+        return null;
     }
 
     public void setPlayerLandmarkData(UUID uuid, PlayerLandmarkData data) {
@@ -43,11 +52,11 @@ public class PoiManager {
     public void renamePoi(String id, String name) {
         PoiData poi = poiDataMap.get(id);
         if (poi != null) {
-            poiDataMap.put(id, new PoiData(poi.id(), poi.type(), name, poi.x(), poi.y(), poi.z()));
+            poiDataMap.put(id, new PoiData(poi.id(), poi.type(), name, poi.x(), poi.y(), poi.z(), poi.worldName()));
         }
     }
 
-    public record PoiData(String id, LandmarkType type, String name, int x, int y, int z) {
+    public record PoiData(String id, LandmarkType type, String name, int x, int y, int z, String worldName) {
 
     }
 
