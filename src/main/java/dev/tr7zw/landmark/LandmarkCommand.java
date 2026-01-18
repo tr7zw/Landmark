@@ -3,7 +3,12 @@ package dev.tr7zw.landmark;
 import com.hypixel.hytale.builtin.teleport.components.*;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.math.vector.*;
+import com.hypixel.hytale.math.vector.Vector3d;
+import com.hypixel.hytale.math.vector.Vector3f;
+import com.hypixel.hytale.protocol.*;
 import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.asset.type.soundevent.config.*;
+import com.hypixel.hytale.server.core.asset.type.soundevent.config.SoundEvent;
 import com.hypixel.hytale.server.core.command.system.*;
 import com.hypixel.hytale.server.core.command.system.arguments.system.*;
 import com.hypixel.hytale.server.core.command.system.arguments.types.*;
@@ -14,6 +19,7 @@ import com.hypixel.hytale.server.core.modules.entity.teleport.*;
 import com.hypixel.hytale.server.core.universe.*;
 import com.hypixel.hytale.server.core.universe.world.*;
 import com.hypixel.hytale.server.core.universe.world.storage.*;
+import com.hypixel.hytale.server.core.util.*;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.*;
@@ -67,19 +73,23 @@ public class LandmarkCommand extends AbstractCommandCollection {
                     Vector3d vector3d = transformcomponent.getPosition().clone();
                     Vector3f vector3f = headrotation.getRotation().clone();
                     Vector3f vector3f1 = transformcomponent.getRotation().clone();
-                    double x = poi.x();
-                    double z = poi.z();
-                    double y = poi.y();
+                    double x = poi.x() + 0.5;
+                    double z = poi.z() + 0.5;
+                    double y = poi.y() + 0.2;
                     float yaw = Float.NaN;
                     float pitch = Float.NaN;
                     float roll = Float.NaN;
-                    Teleport teleport = new Teleport(new Vector3d(x, y, z), new Vector3f(vector3f1.getPitch(), yaw, vector3f1.getRoll()))
-                            .withHeadRotation(new Vector3f(pitch, yaw, roll));
+                    Teleport teleport = new Teleport(new Vector3d(x, y, z), new Vector3f(vector3f1.getPitch(), yaw, vector3f1.getRoll()));
                     store.addComponent(ref, Teleport.getComponentType(), teleport);
                     Player player = store.getComponent(ref, Player.getComponentType());
                     if (player != null) {
                         store.ensureAndGetComponent(ref, TeleportHistory.getComponentType())
                                 .append(world, vector3d, vector3f, String.format("Teleport to %s(%s) (%s, %s, %s)", poi.name(), poi.id(), x, y, z));
+                        int i = SoundEvent.getAssetMap().getIndex("SFX_Portal_Neutral_Teleport_Local");
+                        if (i != Integer.MIN_VALUE) {
+                            SoundUtil.playSoundEvent2d(ref, i, SoundCategory.UI, store);
+                        }
+                        LandmarkUtil.spawnParticle(x, y, z, "Lightning", store);
                     }
                 });
             }
