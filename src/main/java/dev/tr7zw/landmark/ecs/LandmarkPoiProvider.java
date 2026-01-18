@@ -18,6 +18,9 @@ public class LandmarkPoiProvider implements WorldMapManager.MarkerProvider {
     public void update(World world, GameplayConfig gameplayConfig, WorldMapTracker worldMapTracker, int chunkViewRadiusSquared, int playerChunkX, int playerChunkZ) {
         var playerLandmarkData = LandmarkPlugin.get().getPoiManager().getPlayerLandmarkData(worldMapTracker.getPlayer().getUuid());
         for (PoiManager.PoiData poi : LandmarkPlugin.get().getPoiManager().getAllPois()) {
+            if(!poi.worldName().equals(world.getName())) {
+                continue;
+            }
             boolean discovered = playerLandmarkData != null && playerLandmarkData.hasDiscoveredLandmark(poi.id());
             worldMapTracker.trySendMarker(
                     chunkViewRadiusSquared,

@@ -47,7 +47,7 @@ public class LandmarkListPage extends InteractiveCustomUIPage<LandmarkListPage.L
                 String warp = (String) warps.get(i);
                 commandBuilder.append("#WarpList", "Pages/LandmarkEntryButton.ui");
                 commandBuilder.set(selector + " #Name.Text", ((PoiManager.PoiData) this.warps.get(warp)).name());
-                commandBuilder.set(selector + " #World.Text", ((PoiManager.PoiData) this.warps.get(warp)).worldName());
+                commandBuilder.set(selector + " #World.Text", "");// Bad name to show ((PoiManager.PoiData) this.warps.get(warp)).worldName());
                 eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("Warp", warp), false);
             }
         }

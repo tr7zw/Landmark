@@ -43,7 +43,6 @@ public class RenameUI extends InteractiveCustomUIPage<RenameUI.ConfigGuiData> {
     @Override
     public void handleDataEvent( Ref<EntityStore> ref,  Store<EntityStore> store,  RenameUI.ConfigGuiData data) {
         super.handleDataEvent(ref, store, data);
-        System.out.println(data.name);
         if(data.name != null && !data.name.isBlank()) {
             LandmarkPlugin.get().getPoiManager().renamePoi(poi.id(), data.name);
         }
