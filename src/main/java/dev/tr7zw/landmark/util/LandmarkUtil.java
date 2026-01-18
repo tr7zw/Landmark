@@ -1,15 +1,13 @@
-package dev.tr7zw.landmark;
+package dev.tr7zw.landmark.util;
 
 import com.hypixel.hytale.builtin.teleport.components.*;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.spatial.*;
-import com.hypixel.hytale.math.vector.*;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.math.vector.Vector3f;
 import com.hypixel.hytale.protocol.*;
 import com.hypixel.hytale.protocol.packets.interface_.*;
 import com.hypixel.hytale.server.core.*;
-import com.hypixel.hytale.server.core.asset.type.soundevent.config.*;
 import com.hypixel.hytale.server.core.asset.type.soundevent.config.SoundEvent;
 import com.hypixel.hytale.server.core.command.system.*;
 import com.hypixel.hytale.server.core.entity.entities.*;
@@ -19,6 +17,7 @@ import com.hypixel.hytale.server.core.modules.entity.teleport.*;
 import com.hypixel.hytale.server.core.universe.*;
 import com.hypixel.hytale.server.core.universe.world.*;
 import com.hypixel.hytale.server.core.universe.world.storage.*;
+import dev.tr7zw.landmark.ecs.*;
 import it.unimi.dsi.fastutil.objects.*;
 import org.checkerframework.checker.nullness.compatqual.*;
 

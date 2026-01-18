@@ -1,14 +1,14 @@
-package dev.tr7zw.landmark;
+package dev.tr7zw.landmark.ecs;
 
-import com.hypixel.hytale.math.vector.*;
 import com.hypixel.hytale.math.vector.Transform;
 import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.protocol.*;
 import com.hypixel.hytale.protocol.packets.worldmap.*;
 import com.hypixel.hytale.server.core.asset.type.gameplay.*;
 import com.hypixel.hytale.server.core.universe.world.*;
 import com.hypixel.hytale.server.core.universe.world.worldmap.*;
 import com.hypixel.hytale.server.core.util.*;
+import dev.tr7zw.landmark.*;
+import dev.tr7zw.landmark.util.*;
 
 import java.util.*;
 

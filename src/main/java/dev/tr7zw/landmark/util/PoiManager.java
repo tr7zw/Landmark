@@ -1,8 +1,6 @@
-package dev.tr7zw.landmark;
+package dev.tr7zw.landmark.util;
 
-import com.hypixel.hytale.component.*;
-import com.hypixel.hytale.server.core.universe.*;
-import com.hypixel.hytale.server.core.universe.world.storage.*;
+import dev.tr7zw.landmark.ecs.*;
 
 import java.util.*;
 

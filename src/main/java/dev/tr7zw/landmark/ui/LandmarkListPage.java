@@ -1,6 +1,5 @@
 package dev.tr7zw.landmark.ui;
 
-import com.hypixel.hytale.builtin.teleport.*;
 import com.hypixel.hytale.codec.*;
 import com.hypixel.hytale.codec.builder.*;
 import com.hypixel.hytale.component.*;
@@ -10,7 +9,7 @@ import com.hypixel.hytale.server.core.entity.entities.player.pages.*;
 import com.hypixel.hytale.server.core.ui.builder.*;
 import com.hypixel.hytale.server.core.universe.*;
 import com.hypixel.hytale.server.core.universe.world.storage.*;
-import dev.tr7zw.landmark.*;
+import dev.tr7zw.landmark.util.*;
 import it.unimi.dsi.fastutil.objects.*;
 
 import javax.annotation.*;

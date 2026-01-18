@@ -1,11 +1,10 @@
-package dev.tr7zw.landmark;
+package dev.tr7zw.landmark.ecs;
 
 import com.hypixel.hytale.codec.*;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.spatial.*;
 import com.hypixel.hytale.logger.*;
-import com.hypixel.hytale.math.vector.*;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.protocol.*;
@@ -18,6 +17,8 @@ import com.hypixel.hytale.server.core.modules.time.*;
 import com.hypixel.hytale.server.core.universe.world.*;
 import com.hypixel.hytale.server.core.universe.world.storage.*;
 import com.hypixel.hytale.server.core.util.*;
+import dev.tr7zw.landmark.*;
+import dev.tr7zw.landmark.util.*;
 import it.unimi.dsi.fastutil.objects.*;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
