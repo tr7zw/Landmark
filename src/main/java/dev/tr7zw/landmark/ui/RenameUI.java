@@ -1,18 +1,14 @@
-package dev.tr7zw.landmark;
+package dev.tr7zw.landmark.ui;
 
-import com.hypixel.hytale.assetstore.*;
 import com.hypixel.hytale.codec.*;
 import com.hypixel.hytale.codec.builder.*;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.protocol.packets.interface_.*;
-import com.hypixel.hytale.server.core.*;
-import com.hypixel.hytale.server.core.asset.type.item.config.*;
-import com.hypixel.hytale.server.core.entity.entities.*;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.*;
-import com.hypixel.hytale.server.core.ui.*;
 import com.hypixel.hytale.server.core.ui.builder.*;
 import com.hypixel.hytale.server.core.universe.*;
 import com.hypixel.hytale.server.core.universe.world.storage.*;
+import dev.tr7zw.landmark.*;
 
 import javax.annotation.*;
 

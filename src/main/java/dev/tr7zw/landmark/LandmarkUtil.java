@@ -16,6 +16,7 @@ import com.hypixel.hytale.server.core.entity.entities.*;
 import com.hypixel.hytale.server.core.modules.entity.*;
 import com.hypixel.hytale.server.core.modules.entity.component.*;
 import com.hypixel.hytale.server.core.modules.entity.teleport.*;
+import com.hypixel.hytale.server.core.universe.*;
 import com.hypixel.hytale.server.core.universe.world.*;
 import com.hypixel.hytale.server.core.universe.world.storage.*;
 import it.unimi.dsi.fastutil.objects.*;
@@ -56,8 +57,7 @@ public class LandmarkUtil {
                 double x = poi.x() + 0.5;
                 double z = poi.z() + 0.5;
                 double y = poi.y() + 0.2;
-                Teleport teleport = new Teleport(new Vector3d(x, y, z), new Vector3f(vector3f1.getPitch(), vector3f1.getYaw(), vector3f1.getRoll()));
-                store.addComponent(ref, Teleport.getComponentType(), teleport);
+                World targetWorld = Universe.get().getWorld(poi.worldName());
                 Player player = store.getComponent(ref, Player.getComponentType());
                 if (player != null) {
                     player.getPageManager().setPage(ref, store, Page.None);
@@ -69,6 +69,8 @@ public class LandmarkUtil {
                     }
                     spawnParticle(x, y, z, "Lightning", store);
                 }
+                Teleport teleport = new Teleport(targetWorld, new Vector3d(x, y, z), new Vector3f(vector3f1.getPitch(), vector3f1.getYaw(), vector3f1.getRoll()));
+                store.addComponent(ref, Teleport.getComponentType(), teleport);
             });
         }
     }

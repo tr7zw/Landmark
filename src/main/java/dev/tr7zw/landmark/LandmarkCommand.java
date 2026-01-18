@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.*;
 import dev.tr7zw.landmark.ui.*;
 
 import javax.annotation.Nonnull;
+import java.util.*;
 import java.util.concurrent.*;
 
 public class LandmarkCommand extends AbstractCommandCollection {
@@ -24,6 +25,7 @@ public class LandmarkCommand extends AbstractCommandCollection {
         this.addSubCommand(new ClearPlayerCommand());
         this.addSubCommand(new TeleportCommand());
         this.addSubCommand(new ManageCommand());
+        this.addSubCommand(new ListCommand());
     }
 
     private static class TeleportCommand extends CommandBase {
@@ -46,6 +48,42 @@ public class LandmarkCommand extends AbstractCommandCollection {
             }
             var ref = context.senderAsPlayerRef();
             LandmarkUtil.teleportToPOI(context, ref, poi);
+        }
+    }
+
+    private static class ListCommand extends AbstractCommand {
+
+        public ListCommand() {
+            super("list", "landmark.commands.list.desc");
+            this.requirePermission("tr7zw.landmark.command.landmark.tp");
+        }
+
+        @Override
+        protected CompletableFuture<Void> execute(@Nonnull CommandContext context) {
+            CommandSender sender = context.sender();
+            if (sender instanceof Player player) {
+                Ref<EntityStore> ref = player.getReference();
+                if (ref != null && ref.isValid()) {
+                    Store<EntityStore> store = ref.getStore();
+                    World world = store.getExternalData().getWorld();
+                    return CompletableFuture.runAsync(() -> {
+                        var playerLandmarkData = context.senderAsPlayerRef().getStore().getComponent(ref, PlayerLandmarkData.getComponentType());
+                        PlayerRef playerRefComponent = store.getComponent(ref, PlayerRef.getComponentType());
+                        if (playerRefComponent != null) {
+                            Map<String, PoiManager.PoiData> pois = new HashMap<>();
+                            for(PoiManager.PoiData poi : LandmarkPlugin.get().getPoiManager().getAllPois()) {
+                                if(poi.type() == PoiManager.LandmarkType.WAYPOINT && playerLandmarkData != null && playerLandmarkData.hasDiscoveredLandmark(poi.id())) {
+                                    pois.put(poi.id(), poi);
+                                }
+                            }
+                            player.getPageManager().openCustomPage(ref, store, new LandmarkListPage(playerRefComponent, pois, (selectedId) -> {
+                                    LandmarkUtil.teleportToPOI(context, ref, pois.get(selectedId));
+                            }));
+                        }
+                    }, world);
+                }
+            }
+            return CompletableFuture.completedFuture(null);
         }
     }
 
