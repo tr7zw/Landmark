@@ -24,7 +24,10 @@ jobs:
         with:
           name: Artifacts
           # only include non javadoc and non-source jars
-          path: 'build/libs/*!(-javadoc|-sources).jar'
+          path: |
+            build/libs/*.jar
+            !build/libs/*-javadoc.jar
+            !build/libs/*-sources.jar
       
 #      - name: Test Report
 #        uses: dorny/test-reporter@v1
