@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.asset.type.blocktick.*;
 import com.hypixel.hytale.server.core.entity.entities.*;
 import com.hypixel.hytale.server.core.modules.block.*;
 import com.hypixel.hytale.server.core.modules.time.*;
+import com.hypixel.hytale.server.core.universe.*;
 import com.hypixel.hytale.server.core.universe.world.chunk.*;
 import com.hypixel.hytale.server.core.universe.world.chunk.section.*;
 import com.hypixel.hytale.server.core.universe.world.storage.*;
@@ -42,7 +43,8 @@ public class LandmarkSystems {
                     playerLandmarkData = new PlayerLandmarkData();
                     store.addComponent(ref, PlayerLandmarkData.getComponentType(), playerLandmarkData);
                 }
-                LandmarkPlugin.get().getPoiManager().setPlayerLandmarkData(player.getUuid(), playerLandmarkData);
+                PlayerRef pr = store.getComponent(ref, PlayerRef.getComponentType());
+                LandmarkPlugin.get().getPoiManager().setPlayerLandmarkData(player, playerLandmarkData);
             });
         }
 
@@ -52,7 +54,7 @@ public class LandmarkSystems {
         ) {
             Player player = store.getComponent(ref, Player.getComponentType());
             assert player != null;
-            LandmarkPlugin.get().getPoiManager().removePlayerLandmarkData(player.getUuid());
+            LandmarkPlugin.get().getPoiManager().removePlayerLandmarkData(player);
         }
     }
 

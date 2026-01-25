@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.entity.entities.*;
 import com.hypixel.hytale.server.core.modules.entity.*;
 import com.hypixel.hytale.server.core.modules.entity.component.*;
 import com.hypixel.hytale.server.core.modules.time.*;
+import com.hypixel.hytale.server.core.universe.*;
 import com.hypixel.hytale.server.core.universe.world.*;
 import com.hypixel.hytale.server.core.universe.world.storage.*;
 import com.hypixel.hytale.server.core.util.*;
@@ -75,7 +76,8 @@ public class LandmarkBlock implements Component<ChunkStore> {
                 world.execute(() -> {
                     var poidata = LandmarkPlugin.get().getPoiManager().getPoi(getLandmarkUniqueId());
                     String name = poidata != null ? poidata.name() : getLandmarkName();
-                    EventTitleUtil.showEventTitleToPlayer(player.getPlayerRef(), Message.raw(name), Message.raw("Landmark discovered"), true);
+                    PlayerRef pr = store.getComponent(playerRef, PlayerRef.getComponentType());
+                    EventTitleUtil.showEventTitleToPlayer(pr, Message.raw(name), Message.raw("Landmark discovered"), true);
                     int i = SoundEvent.getAssetMap().getIndex("SFX_Discovery_Z1_Medium");
                     if (i != Integer.MIN_VALUE) {
                         SoundUtil.playSoundEvent2d(playerRef, i, SoundCategory.UI, store);

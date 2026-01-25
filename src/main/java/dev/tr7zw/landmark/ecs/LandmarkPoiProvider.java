@@ -4,8 +4,11 @@ import com.hypixel.hytale.math.vector.Transform;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.protocol.packets.worldmap.*;
 import com.hypixel.hytale.server.core.asset.type.gameplay.*;
+import com.hypixel.hytale.server.core.entity.entities.*;
+import com.hypixel.hytale.server.core.universe.*;
 import com.hypixel.hytale.server.core.universe.world.*;
 import com.hypixel.hytale.server.core.universe.world.worldmap.*;
+import com.hypixel.hytale.server.core.universe.world.worldmap.markers.*;
 import com.hypixel.hytale.server.core.util.*;
 import dev.tr7zw.landmark.*;
 import dev.tr7zw.landmark.util.*;
@@ -15,14 +18,14 @@ import java.util.*;
 public class LandmarkPoiProvider implements WorldMapManager.MarkerProvider {
 
     @Override
-    public void update(World world, GameplayConfig gameplayConfig, WorldMapTracker worldMapTracker, int chunkViewRadiusSquared, int playerChunkX, int playerChunkZ) {
-        var playerLandmarkData = LandmarkPlugin.get().getPoiManager().getPlayerLandmarkData(worldMapTracker.getPlayer().getUuid());
+    public void update(World world, MapMarkerTracker mapMarkerTracker, int chunkViewRadiusSquared, int playerChunkX, int playerChunkZ) {
+        var playerLandmarkData = LandmarkPlugin.get().getPoiManager().getPlayerLandmarkData(mapMarkerTracker.getPlayer());
         for (PoiManager.PoiData poi : LandmarkPlugin.get().getPoiManager().getAllPois()) {
             if(!poi.worldName().equals(world.getName())) {
                 continue;
             }
             boolean discovered = playerLandmarkData != null && playerLandmarkData.hasDiscoveredLandmark(poi.id());
-            worldMapTracker.trySendMarker(
+            mapMarkerTracker.trySendMarker(
                     chunkViewRadiusSquared,
                     playerChunkX,
                     playerChunkZ,
@@ -31,17 +34,17 @@ public class LandmarkPoiProvider implements WorldMapManager.MarkerProvider {
                     (discovered ? "Explored" : "Unexplored") + "POI-" + poi.id(),
                     discovered ? "Waypoint - " + poi.name() : "Undiscovered Waypoint",
                     poi,
-                    (id, name, sp) -> new MapMarker(id, name, discovered ? "Landmark_Warp.png" : "Landmark_Warp_Undiscovered.png", PositionUtil.toTransformPacket(new Transform(sp.x(), sp.y(), sp.z())), createContextMenuItems(poi, discovered, worldMapTracker))
+                    (id, name, sp) -> new MapMarker(id, name, discovered ? "Landmark_Warp.png" : "Landmark_Warp_Undiscovered.png", PositionUtil.toTransformPacket(new Transform(sp.x(), sp.y(), sp.z())), createContextMenuItems(poi, discovered, mapMarkerTracker))
             );
         }
     }
 
-    private ContextMenuItem[] createContextMenuItems(PoiManager.PoiData poi, boolean discovered, WorldMapTracker worldMapTracker) {
+    private ContextMenuItem[] createContextMenuItems(PoiManager.PoiData poi, boolean discovered, MapMarkerTracker mapMarkerTracker) {
         List<ContextMenuItem> contextMenuItemList = new ArrayList<>();
         if (discovered && poi.type() == PoiManager.LandmarkType.WAYPOINT) {
             contextMenuItemList.add(new ContextMenuItem("Click to teleport", "landmark tp " + poi.id()));
         }
-        if (discovered && worldMapTracker.getPlayer().hasPermission("tr7zw.landmark.command.landmark.manage")) {
+        if (discovered && mapMarkerTracker.getPlayer().hasPermission("tr7zw.landmark.command.landmark.manage")) {
             contextMenuItemList.add(new ContextMenuItem("Rename", "landmark manage " + poi.id()));
         }
         if(contextMenuItemList.isEmpty()) {
@@ -49,4 +52,5 @@ public class LandmarkPoiProvider implements WorldMapManager.MarkerProvider {
         }
         return contextMenuItemList.toArray(new ContextMenuItem[0]);
     }
+
 }

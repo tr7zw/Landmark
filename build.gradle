@@ -19,9 +19,14 @@ javadoc {
 }
 
 repositories {
+    mavenCentral()
+    /*maven {
+        name = 'CodeMC-HytaleRepo'
+        url = uri('https://repo.codemc.io/repository/hytale/')
+    }*/
     maven {
         name = 'HytaleRepo'
-        url = uri('https://repo.codemc.io/repository/hytale/')
+        url = uri('https://maven.hytale.com/release')
     }
 }
 
@@ -29,6 +34,7 @@ repositories {
 // compile against their code. This requires you to have Hytale installed using
 // the official launcher for now.
 dependencies {
+    //implementation('com.hypixel.hytale:Server-squashed:+')
     implementation('com.hypixel.hytale:Server:+')
 }
 

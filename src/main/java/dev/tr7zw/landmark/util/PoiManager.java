@@ -1,6 +1,7 @@
 package dev.tr7zw.landmark.util;
 
 import com.google.gson.*;
+import com.hypixel.hytale.server.core.entity.entities.*;
 import dev.tr7zw.landmark.*;
 import dev.tr7zw.landmark.ecs.*;
 
@@ -14,7 +15,7 @@ public class PoiManager {
 
     private final Map<String, PoiData> poiDataMap = new HashMap<>();
     //FIXME: there has to be a better way to do this
-    private final HashMap<UUID, PlayerLandmarkData> playerDataMap = new HashMap<>();
+    private final HashMap<Player, PlayerLandmarkData> playerDataMap = new HashMap<>();
 
     public void addPoi(String id, LandmarkType type, String name, int x, int y, int z, String worldName) {
         poiDataMap.put(id, new PoiData(id, type, name, x, y, z, worldName));
@@ -41,16 +42,16 @@ public class PoiManager {
         return null;
     }
 
-    public void setPlayerLandmarkData(UUID uuid, PlayerLandmarkData data) {
-        playerDataMap.put(uuid, data);
+    public void setPlayerLandmarkData(Player player, PlayerLandmarkData data) {
+        playerDataMap.put(player, data);
     }
 
-    public void removePlayerLandmarkData(UUID uuid) {
-        playerDataMap.remove(uuid);
+    public void removePlayerLandmarkData(Player player) {
+        playerDataMap.remove(player);
     }
 
-    public PlayerLandmarkData getPlayerLandmarkData(UUID uuid) {
-        return playerDataMap.get(uuid);
+    public PlayerLandmarkData getPlayerLandmarkData(Player player) {
+        return playerDataMap.get(player);
     }
 
     public void renamePoi(String id, String name) {
