@@ -9,3 +9,5 @@ commands.id.desc = The ID of the landmark.
 commands.list.desc = Lists all unlocked Waypoints you can teleport to.
 commands.manage.desc = Manage a landmark. Use the context menu to run this command.
 button.save = Save
+message.not_discovered = You have not discovered this landmark yet.
+message.cooldown = You cannot teleport yet. Please wait {seconds} second(s) between teleports.

@@ -17,6 +17,7 @@ import com.hypixel.hytale.server.core.modules.entity.teleport.*;
 import com.hypixel.hytale.server.core.universe.*;
 import com.hypixel.hytale.server.core.universe.world.*;
 import com.hypixel.hytale.server.core.universe.world.storage.*;
+import dev.tr7zw.landmark.*;
 import dev.tr7zw.landmark.ecs.*;
 import it.unimi.dsi.fastutil.objects.*;
 import org.checkerframework.checker.nullness.compatqual.*;
@@ -39,7 +40,11 @@ public class LandmarkUtil {
             world.execute(() -> {
                 var playerLandmarkData = context.senderAsPlayerRef().getStore().getComponent(ref, PlayerLandmarkData.getComponentType());
                 if (playerLandmarkData == null || !playerLandmarkData.hasDiscoveredLandmark(poi.id())) {
-                    context.sendMessage(Message.raw("You have not discovered this landmark yet."));
+                    context.sendMessage(Message.translation("landmark.message.not_discovered"));
+                    return;
+                }
+                if (playerLandmarkData.isTpOnCooldown()) {
+                    context.sendMessage(Message.translation("landmark.message.cooldown").param("seconds", LandmarkPlugin.get().getConfig().tpCooldownSeconds));
                     return;
                 }
                 TransformComponent transformcomponent = store.getComponent(ref, TransformComponent.getComponentType());
@@ -70,6 +75,7 @@ public class LandmarkUtil {
                 }
                 Teleport teleport = new Teleport(targetWorld, new Vector3d(x, y, z), new Vector3f(vector3f1.getPitch(), vector3f1.getYaw(), vector3f1.getRoll()));
                 store.addComponent(ref, Teleport.getComponentType(), teleport);
+                playerLandmarkData.setTpCooldown(LandmarkPlugin.get().getConfig().tpCooldownSeconds * 1_000);
             });
         }
     }

@@ -21,6 +21,7 @@ public class PlayerLandmarkData implements Component<EntityStore> {
             .build();
 
     private Set<String> discoveredLandmarks = new HashSet<>();
+    private long tpCooldown = 0;
 
     @Nonnull
     public static ComponentType<EntityStore, PlayerLandmarkData> getComponentType() {
@@ -38,6 +39,14 @@ public class PlayerLandmarkData implements Component<EntityStore> {
         discoveredLandmarks.add(landmarkId);
     }
 
+    public boolean isTpOnCooldown() {
+        return System.currentTimeMillis() < tpCooldown;
+    }
+
+    public void setTpCooldown(long milliseconds) {
+        this.tpCooldown = System.currentTimeMillis() + milliseconds;
+    }
+
     @Nonnull
     public PlayerLandmarkData clone() {
         var copy = new PlayerLandmarkData();
@@ -47,5 +56,6 @@ public class PlayerLandmarkData implements Component<EntityStore> {
 
     public void reset() {
         discoveredLandmarks.clear();
+        tpCooldown = 0;
     }
 }
