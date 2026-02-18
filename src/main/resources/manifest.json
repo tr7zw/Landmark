@@ -1,7 +1,7 @@
 {
     "Group": "tr7zw",
     "Name": "Landmark",
-    "Version": "0.0.6",
+    "Version": "0.0.7",
     "Description": "Add landmarks for servers and adventure maps!",
     "Authors": [
         {
@@ -9,7 +9,7 @@
         }
     ],
     "Website": "tr7zw.dev",
-    "ServerVersion": "*",
+    "ServerVersion": "2026.02.18-f3b8fff95",
     "Dependencies": {
         "Hytale:BlockStateModule": "*"
     },
