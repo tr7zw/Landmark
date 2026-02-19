@@ -66,6 +66,7 @@ public class LandmarkPlugin extends JavaPlugin {
         if (!configFile.exists()) {
             config = new LandmarkConfig();
             try {
+                getDataDirectory().toFile().mkdirs();
                 Files.write(configFile.toPath(), new GsonBuilder().setPrettyPrinting().create().toJson(config).getBytes(StandardCharsets.UTF_8));
             } catch (IOException e) {
                 LOGGER.at(Level.WARNING).withCause(e).log("Failed to write default config file");
